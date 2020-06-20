@@ -6,15 +6,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class BankAccountWithdrawalTest {
-
     private static final AccountBalance ZERO_BALANCE = new AccountBalance(0.0);
 
     private BankAccount bankAccount;
 
     @BeforeEach
     void setup() {
-        bankAccount = new BankAccount();
+        bankAccount = new BankAccount(new ClockMock());
     }
+
 
     @Test
     void given_empty_account_when_withdrawing_money_then_throws_exception() {

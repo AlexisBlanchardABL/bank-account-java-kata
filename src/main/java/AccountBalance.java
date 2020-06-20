@@ -27,6 +27,10 @@ public class AccountBalance {
         return amount.getValue() > balance;
     }
 
+    public double getValue() {
+        return balance;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

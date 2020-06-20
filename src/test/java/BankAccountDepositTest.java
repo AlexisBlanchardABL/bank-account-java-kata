@@ -4,18 +4,17 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BankAccountDepositTest {
-
     private static final AccountBalance ZERO_BALANCE = new AccountBalance(0.0);
 
     private BankAccount bankAccount;
 
     @BeforeEach
     void setup() {
-        bankAccount = new BankAccount();
+        bankAccount = new BankAccount(new ClockMock());
     }
 
     @Test
-    void given_empty_account_operation_when_making_a_deposit_then_deposit_amount_is_added_to_the_balance() {
+    void given_empty_account_when_making_a_deposit_then_deposit_amount_is_added_to_the_balance() {
         // Given
         assertThat(bankAccount.getBalance()).isEqualTo(ZERO_BALANCE);
 
