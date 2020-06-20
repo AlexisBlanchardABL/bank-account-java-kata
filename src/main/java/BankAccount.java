@@ -1,30 +1,30 @@
 
 public class BankAccount {
 
-    private double balance;
+    private static final AccountBalance ZERO_BALANCE = new AccountBalance(0.0);
+
+    private AccountBalance balance;
+
+    public BankAccount() {
+        balance = ZERO_BALANCE;
+    }
 
     public void makeADeposit(double amount) {
-        verifyNonNegativeValue(amount);
+        Deposit deposit = new Deposit(Amount.ofValue(amount));
 
-        balance += amount;
+        makeABankOperation(deposit);
     }
 
     public void withdraw(double amount) {
-        verifyNonNegativeValue(amount);
-        if (amount > getBalance()) {
-            throw new RuntimeException("You can't withdraw more money that what's on your account");
-        }
-
-        balance -= amount;
+        Withdrawal withdrawal = new Withdrawal(Amount.ofValue(amount), getBalance());
+        makeABankOperation(withdrawal);
     }
 
-    private void verifyNonNegativeValue(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Do not accept <= 0 values");
-        }
+    private void makeABankOperation(BankOperation operation) {
+        this.balance = operation.computeNewBalance(getBalance());
     }
 
-    public double getBalance() {
+    public AccountBalance getBalance() {
         return balance;
     }
 
