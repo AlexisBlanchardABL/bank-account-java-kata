@@ -44,4 +44,35 @@ public class BankAccountTest {
         assertThat(exception.getMessage()).isEqualTo("Do not accept <= 0 values");
     }
 
+    @Test
+    void given_empty_account_when_withdrawing_money_then_throws_exception() {
+        // Given
+        assertThat(bankAccount.getBalance()).isEqualTo(0);
+
+        // When
+        // Then
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> bankAccount.withdraw(500.1));
+        assertThat(exception.getMessage()).isEqualTo("You can't withdraw more money that what's on your account");
+    }
+
+    @Test
+    void should_throw_an_exception_when_withdrawing_with_negative_value() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> bankAccount.withdraw(-1000));
+
+        assertThat(exception.getMessage()).isEqualTo("Do not accept <= 0 values");
+    }
+
+    @Test
+    void given_some_money_on_account_when_withdrawing_available_money_then_subtract_it() {
+        // Given
+        bankAccount.makeADeposit(2000.4);
+
+        // When
+        bankAccount.withdraw(100);
+        bankAccount.withdraw(50);
+
+        // Then
+        assertThat(bankAccount.getBalance()).isEqualTo(1850.4);
+    }
+
 }
