@@ -1,5 +1,12 @@
 # bank-account-kata
 
+```
+Apart from running the tests, you can also test the implementation via a simple console program
+found in the Demo.java file.
+
+NB: I consider the demo as a BONUS(not part of the requirements) and its implementation is very 
+basic. Which explains why I didn't test it.
+```
 
 Think of your personal bank account experience. When in doubt, go for the simplest solution.
 
